@@ -1,5 +1,5 @@
 from modeltranslation.translator import register, TranslationOptions
-from cms_core_classes.models import BaseEntity, ContentFieldMixin
+from lite_cms_core.models import BaseEntity, ContentFieldMixin
 
 
 @register(BaseEntity)

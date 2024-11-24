@@ -9,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView
 from tinymce.models import HTMLField
 
-from cms_core_classes.managers import BaseEntityManager
+from lite_cms_core.managers import BaseEntityManager
 
 CONTENT_STATUS_DRAFT = 1
 CONTENT_STATUS_PUBLISHED = 2

@@ -1,4 +1,4 @@
-# django-cms-core-classes
+# django-lite-cms-core
 
 Some lightweight core classes for a cms based on django inspired by 
 [Mezzanine](https://github.com/stephenmcd/mezzanine) CMS. 

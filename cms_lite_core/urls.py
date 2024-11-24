@@ -1,8 +1,8 @@
 from django.urls import path
 
-from cms_core_classes import views
+from lite_cms_core import views
 
-app_name = 'cms_core_classes'
+app_name = 'lite_cms_core'
 
 urlpatterns = [
     path('search/', views.search, name='search'),

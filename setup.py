@@ -10,6 +10,12 @@ setuptools.setup(
         exclude=["cms_core_classes_sample", "*manage.py"]
     ),
     include_package_data=True,
+    package_data={
+        "cms_core_classes": [
+            "templates/cms_core_classes/*.html",
+            "locale/*/LC_MESSAGES/*",
+        ],
+    },
     description='CMS core classes for Django.',
     long_description=long_description,
     long_description_content_type='text/markdown',

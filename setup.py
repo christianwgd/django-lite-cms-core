@@ -19,6 +19,7 @@ setuptools.setup(
     keywords=['django', 'bootstrap', 'cms'],
     install_requires=[
         'django',
+        'django-admin-sortable2',
         'django-bootstrap5',
         'django-filebrowser-no-grappelli',
         'django-tinymce',

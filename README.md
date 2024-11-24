@@ -25,3 +25,11 @@ What's in there?
 - Tests
 - Docs
 - ...
+
+# Outlook
+
+There will come some more add ons for this lib:
+
+- A hirachical page model with menus
+- A blog app
+- ...

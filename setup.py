@@ -13,6 +13,7 @@ setuptools.setup(
     package_data={
         "cms_core_classes": [
             "templates/cms_core_classes/*.html",
+            "templates/cms_core_classes/includes/*.html",
             "locale/*/LC_MESSAGES/*",
         ],
     },

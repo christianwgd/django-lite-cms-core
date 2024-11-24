@@ -1,6 +1,7 @@
 include LICENSE README.md CHANGELOG.md
 recursive-include cms_core_classes/static *
 recursive-include avatar/templates *.html *.txt
+recursive-include avatar/templates/includes *.html *.txt
 recursive-include avatar/locale/*/LC_MESSAGES *.mo *.po
 recursive-include cms_core_classes/templatetags *
 recursive-exclude * __pycache__

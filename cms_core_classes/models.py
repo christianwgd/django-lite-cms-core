@@ -238,7 +238,7 @@ class SluggedMixin(models.Model):
     admin_link.short_description = ""
 
 
-class TimeStamped(models.Model):
+class TimeStampedMixin(models.Model):
 
     class Meta:
         abstract = True

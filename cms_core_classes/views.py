@@ -7,7 +7,7 @@ from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 
 
-def search(request, template="search_results.html", extra_context=None):
+def search(request, template="cms_core_classes/search_results.html", extra_context=None):
     """
     Display search results. Takes an optional "contenttype" GET parameter
     in the form "app-name.ModelName" to limit search results to a single model.
@@ -50,6 +50,6 @@ def ext_search_form(request):
     search_choices = list(choices)
     # sort by localized name
     search_choices.sort(key=itemgetter(0))
-    return render(request, 'ext_search_form.html', {
+    return render(request, 'cms_core_classes/ext_search_form.html', {
         'search_model_choices': search_choices
     })

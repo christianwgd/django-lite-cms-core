@@ -251,8 +251,7 @@ class SearchableManager(Manager):
         """
         Returns the search field names mapped to weights as a dict.
         Used in ``get_queryset`` below to tell ``SearchableQuerySet``
-        which search fields to use. Also used by ``DisplayableAdmin``
-        to populate Django admin's ``search_fields`` attribute.
+        which search fields to use.
 
         Search fields can be populated via
         ``SearchableManager.__init__``, which then get stored in
@@ -311,7 +310,7 @@ class SearchableManager(Manager):
             models = [m for m in models if m not in parents]
         elif getattr(self.model._meta, "abstract", False):
             # When we're combining model subclasses for an abstract
-            # model (eg Displayable), we only want to use models that
+            # model, we only want to use models that
             # are represented by the ``SEARCH_MODEL_CHOICES`` setting.
             # Now this setting won't contain an exact list of models
             # we should use, since it can define superclass models such

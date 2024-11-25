@@ -97,3 +97,9 @@ class BaseEntityManagerTest(TestCase):
             BaseItem.objects.search('testing'),
             [self.base_item],
         )
+
+    def test_base_item_search_with_search_fields(self):
+        self.assertEqual(
+            BaseItem.objects.search('testing', search_fields=['title']),
+            [self.base_item],
+        )

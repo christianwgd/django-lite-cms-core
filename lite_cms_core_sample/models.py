@@ -30,6 +30,6 @@ class SluggedItemFromName(SluggedMixin, BaseItem):
 
     name = models.CharField(max_length=100)
 
-    def get_slug(self):
+    def get_slug(self, attr=None):
         attr = "name"
         return slugify(getattr(self, attr, None) or self.name)

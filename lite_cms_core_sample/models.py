@@ -11,6 +11,8 @@ class BaseItem(BaseEntity):
     Objects for testing the BaseEntity model.
     """
 
+    search_fields = {"title", }
+
 
 class SluggedItem(SluggedMixin, BaseItem):
     """

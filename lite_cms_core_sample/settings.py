@@ -110,7 +110,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Search
 SEARCH_MODEL_CHOICES = (
-    'blog.BlogPost',
-    'page.Page',
-    'feature.Feature',
+    'lite_cms_core_sample.BaseEntity',
 )

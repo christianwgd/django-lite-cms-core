@@ -79,3 +79,21 @@ class BaseEntityTest(TestCase):
         with pytest.raises(NotImplementedError):
             self.base_item.get_absolute_url()
 
+
+class BaseEntityManagerTest(TestCase):
+
+    def setUp(self) -> None:
+        self.fake = Faker('de_DE')
+        for _ in range(5):
+            BaseItem.objects.create(
+                title=' '.join(self.fake.words()),
+            )
+        self.base_item = BaseItem.objects.create(
+            title='This is a text for testing',
+        )
+
+    def test_base_item_search(self):
+        self.assertEqual(
+            BaseItem.objects.search('testing'),
+            [self.base_item],
+        )

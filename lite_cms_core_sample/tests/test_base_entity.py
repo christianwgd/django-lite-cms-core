@@ -5,7 +5,7 @@ from django.test import TestCase
 from django.utils.timezone import now
 from faker import Faker
 
-from lite_cms_core.models import CONTENT_STATUS_DRAFT, unique_slug
+from lite_cms_core.models import CONTENT_STATUS_DRAFT
 from lite_cms_core_sample.models import BaseItem
 
 

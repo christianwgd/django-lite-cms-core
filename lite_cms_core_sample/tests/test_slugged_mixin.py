@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.utils.text import slugify
 from faker import Faker
 
-from lite_cms_core_sample.models import BaseItem, SluggedItem, SluggedItemFromName
+from lite_cms_core_sample.models import SluggedItem, SluggedItemFromName
 
 
 class SluggedMixinTest(TestCase):

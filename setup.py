@@ -30,6 +30,7 @@ setuptools.setup(
         'django-bootstrap5',
         'django-filebrowser-no-grappelli',
         'django-tinymce',
+        'Pillow',
     ],
     classifiers=[
         "Programming Language :: Python :: 3",

@@ -32,6 +32,8 @@ urlpatterns = [
     path('', views.index, name='home'),
 
     path('core/', include('lite_cms_core.urls')),
+
+    path('<slug:slug>/', views.SluggedItemDetailView.as_view(), name='slugged-item-detail'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

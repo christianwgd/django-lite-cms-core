@@ -196,9 +196,6 @@ class SluggedMixin(models.Model):
     class Meta:
         abstract = True
 
-    def __str__(self):
-        return self.slug
-
     def save(self, *args, **kwargs):
         """
         If no slug is provided, generates one before saving.

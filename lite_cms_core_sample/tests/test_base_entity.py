@@ -1,15 +1,12 @@
 from datetime import timedelta
 
 import pytest
-from django.contrib import auth
 from django.test import TestCase
 from django.utils.timezone import now
 from faker import Faker
 
-from lite_cms_core.models import CONTENT_STATUS_DRAFT
+from lite_cms_core.models import CONTENT_STATUS_DRAFT, unique_slug
 from lite_cms_core_sample.models import BaseItem
-
-User = auth.get_user_model()
 
 
 class BaseEntityTest(TestCase):
@@ -18,7 +15,6 @@ class BaseEntityTest(TestCase):
         self.fake = Faker('de_DE')
         self.base_item = BaseItem.objects.create(
             title=' '.join(self.fake.words()),
-            string_property=self.fake.word()[:20],
         )
 
     def test_base_item_str(self):
@@ -82,3 +78,4 @@ class BaseEntityTest(TestCase):
     def test_base_item_get_absolute_url(self):
         with pytest.raises(NotImplementedError):
             self.base_item.get_absolute_url()
+

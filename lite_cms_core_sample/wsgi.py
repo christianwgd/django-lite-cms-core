@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'wgdnet.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'lite_cms_core_sample.settings')
 
 application = get_wsgi_application()

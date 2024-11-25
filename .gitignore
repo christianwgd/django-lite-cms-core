@@ -115,3 +115,7 @@ django_bootstrap_icons_sample/static/icon_cache/*
 
 # code coverage
 htmlcov/
+
+# database
+*.db
+db.*

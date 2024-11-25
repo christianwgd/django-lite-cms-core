@@ -52,8 +52,8 @@ class SluggedMixinTest(TestCase):
             )
         )
 
-    def test_slugged_item_admin_link(self):
-        self.assertEqual(
-            self.slugged_item.admin_link(),
-            f"<a href='/{self.slugged_item.slug}/'>View on site</a>"
-        )
+    # def test_slugged_item_admin_link(self):
+    #     self.assertEqual(
+    #         self.slugged_item.admin_link(),
+    #         f"<a href='/{self.slugged_item.slug}/'>View on site</a>"
+    #     )

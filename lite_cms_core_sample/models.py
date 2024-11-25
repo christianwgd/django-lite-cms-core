@@ -3,8 +3,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 
-from build.lib.lite_cms_core.models import SluggedMixin
-from lite_cms_core.models import BaseEntity
+from lite_cms_core.models import BaseEntity, SluggedMixin
 
 
 class BaseItem(BaseEntity):

@@ -1,5 +1,6 @@
 from datetime import timedelta
 
+import pytest
 from django.contrib import auth
 from django.test import TestCase
 from django.utils.timezone import now
@@ -79,5 +80,5 @@ class BaseEntityTest(TestCase):
         )
 
     def test_base_item_get_absolute_url(self):
-        with self.assertRaises(NotImplementedError):
+        with pytest.raises(NotImplementedError):
             self.base_item.get_absolute_url()

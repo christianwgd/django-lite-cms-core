@@ -26,7 +26,6 @@ What's in there?
 
 # Todo
 
-- Tests
 - Docs
 - ...
 

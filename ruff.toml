@@ -1,3 +1,5 @@
+exclude = ["docs"]
+
 # Enable flake8-bugbear (`B`) rules.
 lint.select = [
     "E", "F", "B", "PL", "S", "W", "N", "G", "C4", "EM",

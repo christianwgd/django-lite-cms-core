@@ -1,7 +1,7 @@
 from datetime import timedelta
 
-import pytest
 from django.test import TestCase
+from django.urls import reverse
 from django.utils.timezone import now
 from faker import Faker
 
@@ -76,8 +76,10 @@ class BaseEntityTest(TestCase):
         )
 
     def test_base_item_get_absolute_url(self):
-        with pytest.raises(NotImplementedError):
-            self.base_item.get_absolute_url()
+        self.assertEqual(
+            self.base_item.get_absolute_url(),
+            reverse('base-item-detail', kwargs={'pk': self.base_item.pk})
+        )
 
 
 class BaseEntityManagerTest(TestCase):

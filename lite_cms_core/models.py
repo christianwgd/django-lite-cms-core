@@ -21,12 +21,9 @@ CONTENT_STATUS_CHOICES = (
 
 def wrapped_manager(klass):
     if getattr(settings, "USE_MODELTRANSLATION", False):
-        # pylint: disable=import-error, import-outside-toplevel
         from modeltranslation.manager import MultilingualManager
-
         class Mgr(MultilingualManager, klass):
             pass
-
         return Mgr()
     return klass()
 

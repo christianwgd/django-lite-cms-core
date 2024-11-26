@@ -1,0 +1,35 @@
+{% extends 'django_bootstrap5/bootstrap5.html' %}
+{% load base_tags %}
+
+{% block bootstrap5_extra_head %}
+{{ block.super }}
+{% endblock %}
+
+{% block bootstrap5_extra_script %}
+<script defer src="{% static 'lite_cms_core/js/toolbar.js' %}"></script>
+{% endblock %}
+
+{% block bootstrap5_title %}{% endblock %}
+
+{% block bootstrap5_content %}
+
+{% if user.is_staff %}
+{% block edit_toolbar %}
+    {% edit_toolbar %}
+{% endblock %}
+{% endif %}
+
+<!-- Content -->
+<div class="container mb-3" id="id_content">
+
+    <div class="row">
+        <div class="col-12">
+            <h3 class="page_title">{% block page_title %}{% endblock %}</h3>
+            {% bootstrap_messages %}
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+</div>
+<!-- END Content -->
+{% endblock %}

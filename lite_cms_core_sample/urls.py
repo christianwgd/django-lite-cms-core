@@ -31,10 +31,12 @@ urlpatterns = [
 
     path('', views.index, name='home'),
 
-    path('core/', include('lite_cms_core.urls')),
+    path('lite_cms_core/', include('lite_cms_core.urls')),
 
-    path('<slug:slug>/', views.SluggedItemDetailView.as_view(), name='slugged-item-detail'),
+    path('base/<int:pk>/', views.BaseItemDetailView.as_view(), name='base-item-detail'),
+    path('slugged/<slug:slug>/', views.SluggedItemDetailView.as_view(), name='slugged-item-detail'),
+    path('content/<slug:slug>/', views.ContentItemDetailView.as_view(), name='content-item-detail'),
 ]
-if settings.DEBUG:
+if settings.DEBUG:  # pragma: no cover
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

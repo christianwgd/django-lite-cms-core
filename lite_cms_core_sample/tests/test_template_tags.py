@@ -1,4 +1,4 @@
-from django.contrib import auth
+from django.contrib.auth.models import User
 from django.template import Context
 from django.test import TestCase, RequestFactory
 from django.urls import reverse
@@ -6,9 +6,6 @@ from faker import Faker
 
 from lite_cms_core.templatetags import base_tags
 from lite_cms_core_sample.models import SluggedItem
-
-
-User = auth.get_user_model()
 
 
 class TemplateTagTest(TestCase):

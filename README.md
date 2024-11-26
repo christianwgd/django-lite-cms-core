@@ -26,7 +26,7 @@ What's in there?
 
 # Todo
 
-- Docs
+- Docs (wip)
 - ...
 
 # Outlook

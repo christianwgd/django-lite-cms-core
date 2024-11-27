@@ -1,6 +1,9 @@
 django-lite-cms-core
 ====================
 
+.. warning::
+    The docs is work inprogress, so it is not completed by now.
+
 Django-lite-cms-core provides some base classes to add CMS functionality to
 any Django app and is inspired by Mezzanine_ CMS. While Mezzanine_ is a full
 featured CMS django-lite-cms is a more modular approach.

@@ -93,6 +93,15 @@ def unique_slug(queryset, slug_field, slug):
 
 
 class BaseEntity(models.Model):
+    """
+    Abstract base model for basic cms funcionality.
+
+    :attribute title: Title of the entity, string with a maxlen of 200
+    :attribute status: The status of the entity, one of CONTENT_STATUS_DRAFT, CONTENT_STATUS_PUBLISHED,
+    :attribte publish_date: Time and date when the entity is or will be published
+    :attribute expiry_date: Time and date when the entity is expired, so will not be seen by users anymore
+
+    """
     class Meta:
         abstract = True
 

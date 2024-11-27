@@ -3,6 +3,8 @@
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![Django CI run test](https://github.com/christianwgd/django-lite-cms-core/actions/workflows/django-test.yml/badge.svg)](https://github.com/christianwgd/django-lite-cms-core/actions/workflows/django-test.yml)
 [![codecov](https://codecov.io/gh/christianwgd/django-lite-cms-core/graph/badge.svg?token=azVWLmIFmg)](https://codecov.io/gh/christianwgd/django-lite-cms-core)
+![PyPI](https://img.shields.io/pypi/v/django-lite-cms-core)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/django-lite-cms-core)
 
 Some lightweight core classes for a cms based on django inspired by 
 [Mezzanine](https://github.com/stephenmcd/mezzanine) CMS. 

@@ -1,4 +1,4 @@
-django-lite-cms-core
+^django-lite-cms-core
 ====================
 
 .. toctree::

@@ -6,34 +6,39 @@
 [![PyPI](https://img.shields.io/pypi/v/django-lite-cms-core)](https://pypi.org/project/django-lite-cms-core/)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/django-lite-cms-core)
 
-Some lightweight core classes for a cms based on django inspired by 
-[Mezzanine](https://github.com/stephenmcd/mezzanine) CMS. 
+``django-lite-cms``is a lightweight and modular CMS addon for Django inspired
+by [Mezzanine](https://github.com/stephenmcd/mezzanine) CMS. This package contains the core classes that are needed 
+to get basic CMS properties.
 
-Mezzanine is a complete CMS System and may be too complex for 
-some apps that would only like to add some CMS functionality.
+I've started with [Mezzanine](https://github.com/stephenmcd/mezzanine) CMS for my projects but soon found it a little 
+bit too heavy for my purposes. Unfortunately Mezzanine was not optimal supported 
+by the community (at this time it has open vulnerabilities and the latest Django 
+supported is 4.0) so I needed a lighter approach that would also be a lot more modular. 
+At this time the code was only project local and I copied the code around between 
+different projects. To stop that I now started to put the code in installable libraries.
 
-What's in there?
+## Features
 
 - Base class with
   - Properties: title, publish_date, expiry_date
-  - Status model (currently DRAFT and PUBLISHED)
+  - Status model (currently DRAFT and PUBLISHED) with scheduled publishing
   - Manager with "published" query, based on status and date fields
-- Mixins
-  - SluggedMixin with unique slugs
-  - TimeStampedMixin with created and changed properties
-  - AdminOrderMixin based on django-admin-sortable2
-  - ContentFieldMixin based on django-tinymce4
-- Search functionality
-- Admin edit links in frontend
+  - Supporting multilingual sites
+  - Search functionality
+  - Admin edit links in frontend
+  - HTML content field with tinymce5
 
-# Todo
 
-- Docs (wip)
-- ...
+## Documentation
+
+Documentation is available at https://django-lite-cms-core.readthedocs.io.
+
+Please note that the docs is work in progress, so it is not completed by now and 
+will be subject to change.
 
 # Outlook
 
-There will come some more add ons for this lib:
+There will come some more add-ons for this lib:
 
 - A hirachical page model with menus
 - A blog app

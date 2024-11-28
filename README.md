@@ -36,7 +36,7 @@ Documentation is available at https://django-lite-cms-core.readthedocs.io.
 Please note that the docs is work in progress, so it is not completed by now and 
 will be subject to change.
 
-# Outlook
+## Outlook
 
 There will come some more add-ons for this lib:
 

@@ -11,6 +11,7 @@ django-lite-cms-core
 **django-lite-cms** is a lightweight and modular CMS addon for Django. This
 package contains the core classes that are needed to get basic CMS properties.
 
+
 Installation
 ------------
 
@@ -50,6 +51,24 @@ installed, because ``django-lite-cms-core`` depends on them:
 Settings
 --------
 
+``django-lite-cms-core`` doesn't need any specific settings. But most of
+the dependencies need some settings. Please refer to the specific modules
+documentation to get the settings docs:
+
+- django-bootstrap5: https://django-bootstrap5.readthedocs.io/en/latest/settings.html
+
+- django-tinymce: https://django-tinymce.readthedocs.io/en/latest/installation.html#configuration
+
+- django-filebrowser-no-grappelli: https://django-filebrowser.readthedocs.io/en/latest/settings.html
+
+.. note::
+    django-filebrowser-no-grappelli doesn't provide any explicit documentation but refers to the
+    django-filebrowser (with grappelli) version.
+
+
+
+
+
 
 Getting Started
 ---------------
@@ -75,14 +94,22 @@ To integrate ``django-lite-cms-core`` with your site, follow the steps as listed
 .. note::
     You need to include the url patterns ony if you want to use the search functionality.
 
-
-Django-lite-cms-core provides some base classes to add CMS functionality to
-any Django app and is inspired by Mezzanine_ CMS. While Mezzanine_ is a full
-featured CMS django-lite-cms is a more modular approach.
-
-.. _Mezzanine: http://mezzanine.jupo.org/
+Model Classes
+-------------
 
 .. automodule:: lite_cms_core.models
+    :members:
+
+Model Managers
+--------------
+
+.. automodule:: lite_cms_core.managers
+    :members:
+
+Views
+-----
+
+.. automodule:: lite_cms_core.views
     :members:
 
 Indices and tables

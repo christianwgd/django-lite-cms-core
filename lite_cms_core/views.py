@@ -2,7 +2,6 @@ from operator import itemgetter
 
 from django.apps import apps
 from django.conf import settings
-from django.contrib.auth.views import LogoutView
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
@@ -54,7 +53,3 @@ def ext_search_form(request):
     return render(request, 'lite_cms_core/ext_search_form.html', {
         'search_model_choices': search_choices
     })
-
-
-class LiteCmsLogoutView(LogoutView):
-    pass

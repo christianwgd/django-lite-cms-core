@@ -14,12 +14,12 @@ I've started with [Mezzanine](https://github.com/stephenmcd/mezzanine) CMS for m
 bit too heavy for my purposes. Unfortunately Mezzanine was not optimal supported 
 by the community (at this time it has open vulnerabilities and the latest Django 
 supported is 4.0) so I needed a lighter approach that would also be a lot more modular. 
-At this time the code was only project local and I copied the code around between 
-different projects. To stop that I now started to put the code in installable libraries.
+Since my code was only project local and I copied the code around between 
+different projects, I started to put the code in installable libraries.
 
 ## Features
 
-- Base class with
+- Base classes with
   - Properties: title, publish_date, expiry_date
   - Status model (currently DRAFT and PUBLISHED) with scheduled publishing
   - Manager with "published" query, based on status and date fields

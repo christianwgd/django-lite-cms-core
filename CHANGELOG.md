@@ -5,6 +5,11 @@
 ## 0.0.4
 
 ### Fixed
+  - Fix search-form extended search button icon
+
+## 0.0.4
+
+### Fixed
   - Remove local logout view and use from django.contrib.auth directly
 
 ## 0.0.3

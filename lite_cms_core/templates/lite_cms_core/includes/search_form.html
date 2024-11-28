@@ -1,17 +1,17 @@
-{% load i18n bootstrap_icons %}
-<form action="{% url "core:search" %}" class="" role="search">
+{% load i18n static %}
+<form action="{% url "lite_cms_core:search" %}" class="" role="search">
     <div class="input-group">
         <input class="form-control" placeholder="{% trans "Search" %}"
-               type="text" name="q" value="{{ request.REQUEST.q }}" style="font-family: 'Roboto', sans-serif;"
+               type="text" name="q" value="{{ request.REQUEST.q }}"
                aria-label="{% trans 'Search' %}" required>
         <button class="input-group-text" id="basic-addon1">
-            {% bs_icon 'search' %}
+            <img src="{% static 'lite_cms_core/icons/search.svg' %}" alt="{% trans 'Search' %}">
         </button>
         <div class="input-group-append">
             {% if search_model_choices|length > 1 %}
             <div class="input-group-text" title="{% trans 'Extended search' %}">
-                <a href="{% url 'core:extsearch' %}" aria-label="{% trans 'Extended search' %}">
-                    {% bs_icon 'three-dots' extra_classes='bi-valign-middle' color='gray' %}
+                <a href="{% url 'lite_cms_core:extsearch' %}" aria-label="{% trans 'Extended search' %}">
+                    <img src="{% static 'lite_cms_core/icons/search.svg' %}" alt="{% trans 'Extended search' %}">
                 </a>
             </div>
             {% endif %}

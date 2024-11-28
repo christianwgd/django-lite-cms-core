@@ -1,6 +1,6 @@
-{% load i18n bootstrap_icons %}
-<div id="editable-toolbar" method="POST" action="/admin/logout/">
-    <form class="success" id="logout-form" action="{% url 'frontend_auth:logout' %}" method="post">
+{% load i18n static %}
+<div id="editable-toolbar">
+    <form class="success" id="logout-form" action="{% url 'lite_cms_core:logout' %}" method="post">
         {% csrf_token %}
         <a class="admin-link" href="#" onclick="document.getElementById('logout-form').submit();">
             {% trans 'Log out' %}
@@ -11,7 +11,11 @@
                 {% trans 'Edit in Admin' %}
             </a>
         {% endif %}
-        <span class="show-toolbar admin-link-icon" style="display: none;">{% bs_icon 'chevron-right' %}</span>
-        <span class="hide-toolbar admin-link-icon">{% bs_icon 'chevron-left' %}</span>
+        <span class="show-toolbar admin-link-icon" style="display: none;">
+            <img src="{% static 'lite_cms_core/icons/chevron-right.svg' %}" alt="">
+        </span>
+        <span class="hide-toolbar admin-link-icon">
+            <img src="{% static 'lite_cms_core/icons/chevron-left.svg' %}" alt="">
+        </span>
     </form>
 </div>

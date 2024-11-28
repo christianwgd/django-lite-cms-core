@@ -2,7 +2,15 @@
 
 <!-- GENERATOR_PLACEHOLDER -->
 
-## 0.0.4
+## 0.0.6
+
+### Fixed 
+  - Add missing translation *.mo files
+
+### Fixed
+  - Fix search-form extended search button icon
+
+## 0.0.5
 
 ### Fixed
   - Fix search-form extended search button icon

@@ -66,10 +66,6 @@ documentation to get the settings docs:
     django-filebrowser (with grappelli) version.
 
 
-
-
-
-
 Getting Started
 ---------------
 
@@ -93,6 +89,7 @@ To integrate ``django-lite-cms-core`` with your site, follow the steps as listed
 
 .. note::
     You need to include the url patterns ony if you want to use the search functionality.
+
 
 Model Classes
 -------------

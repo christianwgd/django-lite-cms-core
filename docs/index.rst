@@ -90,6 +90,34 @@ To integrate ``django-lite-cms-core`` with your site, follow the steps as listed
 .. note::
     You need to include the url patterns ony if you want to use the search functionality.
 
+To make use of the classes create a model that inhertits from them like this::
+
+    class BlogPost(ContentFieldMixin, TimeStampedMixin, SluggedMixin, BaseEntity):
+        """
+        A blog post.
+        """
+
+        class Meta:
+            verbose_name = _("Blog post")
+            verbose_name_plural = _("Blog posts")
+            ordering = ("-created",)
+
+        def __str__(self):
+            return self.title
+
+        author = models.ForeignKey(
+            User, verbose_name=_('Author'), on_delete=models.PROTECT
+        )
+        categories = models.ManyToManyField(
+            "BlogCategory", verbose_name=_("Categories"),
+            blank=True, related_name="blogposts"
+        )
+
+        # Specify the fields for searching
+        search_fields = {"title", "content"}
+
+        def get_absolute_url(self):
+            return reverse('blog:blogpost-detail', args=[str(self.slug)])
 
 Model Classes
 -------------

@@ -280,7 +280,17 @@ class ContentFieldMixin(models.Model):
 
 class AdminOrderMixin(models.Model):
     """
-    Let the user order the model instances in admin
+    Let the user order the model instances in admin.
+
+    The mixin adds a sort_order positive integer field to the class,
+    which is a prerequisite for the django-admin-sortable2 module.
+
+    Since inner classes are not inherited, it would make no
+    sense to set the ordering here. So it's up to you to set the
+    ordering to ``ordering = ['sort_order']``.
+
+    In the admin please inherit from ``SortableAdminMixin`` as described
+    in the docs of django-admin-sortable2.
     """
 
     class Meta:

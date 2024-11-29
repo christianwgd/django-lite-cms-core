@@ -12,7 +12,7 @@ to get basic CMS properties.
 
 I've started with [Mezzanine](https://github.com/stephenmcd/mezzanine) CMS for my projects but soon found it a little 
 bit too heavy for my purposes. Unfortunately Mezzanine was not optimal supported 
-by the community (at this time it has open vulnerabilities and the latest Django 
+by the community (at this time it has open vulnerabilities and the latest Django version
 supported is 4.0) so I needed a lighter approach that would also be a lot more modular. 
 Since my code was only project local and I copied the code around between 
 different projects, I started to put the code in installable libraries.
@@ -33,7 +33,7 @@ different projects, I started to put the code in installable libraries.
 
 Documentation is available at https://django-lite-cms-core.readthedocs.io.
 
-Please note that the docs is work in progress, so it is not completed by now and 
+Please note that the docs are work in progress, so it is not completed by now and 
 will be subject to change.
 
 ## Outlook

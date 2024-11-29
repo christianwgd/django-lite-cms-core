@@ -6,11 +6,9 @@
 }
 
 #editable-toolbar a,
-#editable-toolbar span,
-.admin-feature-link {
+#editable-toolbar span {
 	text-decoration: none;
 	color: #222 !important;
-	font-family: 'Roboto Condensed', sans-serif !important;
 	font-size: 11px !important;
 	font-weight: normal;
 	text-transform: uppercase;
@@ -21,12 +19,6 @@
 	white-space: nowrap;
 	line-height: 1em;
 	border: .5px solid #ccc;
-}
-
-.admin-feature-link {
-	position: absolute;
-	top: 0;
-	left: -32px;
 }
 
 .admin-link-icon {

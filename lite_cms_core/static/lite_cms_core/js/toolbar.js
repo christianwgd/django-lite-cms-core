@@ -1,26 +1,21 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Get the elements
-    const hideToolbarButtons = document.querySelectorAll('.hide-toolbar');
-    const showToolbarButtons = document.querySelectorAll('.show-toolbar');
+    // Select elements
+    const hideToolbarButton = document.querySelector('.hide-toolbar');
+    const showToolbarButton = document.querySelector('.show-toolbar');
     const adminLinks = document.querySelectorAll('.admin-link');
 
-    // Add click event to hide-toolbar buttons
-    hideToolbarButtons.forEach(function (button) {
-        button.addEventListener('click', function () {
-            button.style.display = 'none';
-            showToolbarButtons.forEach(btn => btn.style.display = 'block');
-            adminLinks.forEach(link => link.style.display = 'none');
-        });
+    // Hide toolbar logic
+    hideToolbarButton.addEventListener('click', function () {
+        console.log('hide collaps button');
+        hideToolbarButton.style.display = 'none';
+        showToolbarButton.style.display = 'block';
+        adminLinks.forEach(link => link.style.display = 'none');
     });
 
-    // Add click event to show-toolbar buttons
-    showToolbarButtons.forEach(function (button) {
-        button.addEventListener('click', function () {
-            button.style.display = 'none';
-            hideToolbarButtons.forEach(btn => btn.style.display = 'block');
-            adminLinks.forEach(link => link.style.display = 'block');
-        });
+    // Show toolbar logic
+    showToolbarButton.addEventListener('click', function () {
+        showToolbarButton.style.display = 'none';
+        hideToolbarButton.style.display = 'block';
+        adminLinks.forEach(link => link.style.display = 'block');
     });
 });
-
-

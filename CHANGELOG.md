@@ -2,6 +2,11 @@
 
 <!-- GENERATOR_PLACEHOLDER -->
 
+## 0.0.7
+
+### Changed
+  - Remove jQuery dependency: Change toolbar.js from jquery to plain javascript
+
 ## 0.0.6
 
 ### Fixed 

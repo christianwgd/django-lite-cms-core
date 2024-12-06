@@ -2,13 +2,18 @@ exclude = ["docs"]
 
 # Enable flake8-bugbear (`B`) rules.
 lint.select = [
-    "E", "F", "B", "PL", "S", "W", "N", "G", "C4", "EM",
-    "ISC", "ICN", "PIE", "T20", "PYI", "PT", "RET", "INT", "RUF"
+    "B", "E", "F", "PL", "S", "W", "N", "G", "C4", "EM",
+    "ISC", "ICN", "PIE", "T20", "PYI", "PT", "RET", "INT", "RUF",
+    # "D",
 ]
 
 line-length = 120
 lint.ignore = [
     "B905",  # `zip()` without an explicit `strict=` parameter
+    "D401",  # Disable "non-imparative-mood for docstrings
+    "D203",  # One blank line before class
+    "D212",  # Disable multi-line-summary-first-line
+    "D106",  # Disable missing docstrings for pulic nested classes (Meta class)
     "PT009",  # Use a regular `assert` instead of unittest-style `{assertion}`
     "S308",  # Use of `mark_safe` may expose cross-site scripting vulnerabilities
     "PLR2004",  # magic-value-comparison

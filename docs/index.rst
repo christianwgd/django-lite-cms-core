@@ -137,6 +137,12 @@ Views
 .. automodule:: lite_cms_core.views
     :members:
 
+Template Tags
+-------------
+
+.. automodule:: lite_cms_core.templatetags.base_tags
+    :members:
+
 Indices and tables
 ==================
 * :ref:`genindex`

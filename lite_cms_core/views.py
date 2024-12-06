@@ -1,3 +1,4 @@
+"""Django Lite CMS Views."""
 from operator import itemgetter
 
 from django.apps import apps
@@ -9,8 +10,10 @@ from django.utils.translation import gettext_lazy as _
 
 def search(request, template="lite_cms_core/search_results.html", extra_context=None):
     """
-    Display search results. Takes an optional "contenttype" GET parameter
-    in the form "app-name.ModelName" to limit search results to a single model.
+    Display search results.
+
+    Takes an optional "contenttype" GET parameter in the form "app-name.ModelName"
+    to limit search results to a single model.
     """
     query = request.GET.get("q", "")
     try:
@@ -38,6 +41,11 @@ def search(request, template="lite_cms_core/search_results.html", extra_context=
 
 
 def ext_search_form(request):
+    """
+    Extended search form.
+
+    The extended search form lets users select a model to search on.
+    """
     choices = set()
     for name in settings.SEARCH_MODEL_CHOICES:
         try:

@@ -14,8 +14,6 @@ import sys
 import django
 from django.conf import settings
 
-settings.configure()
-django.setup()
 
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 
@@ -23,6 +21,10 @@ on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 sys.path.insert(0, os.path.abspath('..'))
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'lite_cms_core_sample.settings')
+
+settings.configure()
+django.setup()
 
 # -- General configuration -----------------------------------------------------
 

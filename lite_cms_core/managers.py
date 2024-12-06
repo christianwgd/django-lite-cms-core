@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+"""Django Lite CMS Managers."""
 from functools import reduce
 from operator import ior, iand
 from string import punctuation
@@ -12,10 +13,19 @@ from django.utils.timezone import now
 
 
 class PublishedManager(Manager):
-    """
-    For non-staff users, return items with a published status.
-    """
+    """For non-staff users, return items with a published status."""
+
     def published(self, for_user=None):
+        """
+        Return a QuerySet of published items.
+
+        An item is published if it has the status CONTENT_STATUS_PUBLISHED and
+        the pusblish_date is lower or equal to *now* and the expiry_date is
+        grater or equal to *now*. If the publish_date or the expiry_date is None,
+        they will be ignored.
+
+        Not published items will only be returned for staff users.
+        """
         if for_user is not None and for_user.is_staff:
             return self.all()
         return self.filter(
@@ -26,6 +36,7 @@ class PublishedManager(Manager):
         )
 
     def get_by_natural_key(self, slug):
+        """Return item by natural key."""
         return self.get(slug=slug)
 
 
@@ -84,6 +95,8 @@ STOP_WORDS = (
 
 def search_fields_to_dict(fields):
     """
+    Convert search fields to a dictionary.
+
     In ``SearchableQuerySet`` and ``SearchableManager``, search fields
     can either be a sequence, or a dict of fields mapped to weights.
     This function converts sequences to a dict mapped to even weights,
@@ -100,12 +113,10 @@ def search_fields_to_dict(fields):
 
 
 class SearchableQuerySet(QuerySet):
-    """
-    QuerySet providing main search functionality for
-    ``SearchableManager``.
-    """
+    """QuerySet providing main search functionality for ``SearchableManager``."""
 
     def __init__(self, *args, **kwargs):
+        """Init SearchableQuerySet."""
         self._search_ordered = False
         self._search_terms = set()
         self._search_fields = kwargs.pop("search_fields", {})
@@ -113,12 +124,13 @@ class SearchableQuerySet(QuerySet):
 
     def search(self, query, search_fields=None):
         """
+        Do the search on SearchableQuerySet.
+
         Build a queryset matching words in the given search query,
         treating quoted terms as exact phrases and taking into
         account + and - symbols as modifiers controlling which terms
         to require and exclude.
         """
-
         # ### DETERMINE FIELDS TO SEARCH ###
 
         # Use search_fields arg if given, otherwise use search_fields
@@ -182,26 +194,23 @@ class SearchableQuerySet(QuerySet):
         return queryset.distinct()
 
     def _clone(self):
-        """
-        Ensure attributes are copied to subsequent queries.
-        """
+        """Ensure attributes are copied to subsequent queries."""
         clone = super()._clone()
-        # pylint: disable=protected-access
         clone._search_terms = self._search_terms
         clone._search_fields = self._search_fields
         clone._search_ordered = self._search_ordered
         return clone
 
     def order_by(self, *field_names):
-        """
-        Mark the filter as being ordered if search has occurred.
-        """
+        """Mark the filter as being ordered if search has occurred."""
         if not self._search_ordered:
             self._search_ordered = len(self._search_terms) > 0
         return super().order_by(*field_names)
 
     def annotate_scores(self):
         """
+        Annotate SearchableQuerySet with scores.
+
         If search has occurred and no ordering has occurred, decorate
         each result with the number of search terms so that it can be
         sorted by the number of occurrence of terms.
@@ -238,18 +247,21 @@ class SearchableQuerySet(QuerySet):
 class SearchableManager(Manager):
     """
     Manager providing a chainable queryset.
+
     Adapted from http://www.djangosnippets.org/snippets/562/
     search method supports spanning across models that subclass the
     model being used to search.
     """
 
     def __init__(self, *args, **kwargs):
+        """Init SearchableManager."""
         self._search_fields = kwargs.pop("search_fields", {})
         super().__init__(*args, **kwargs)
 
     def get_search_fields(self):
         """
         Returns the search field names mapped to weights as a dict.
+
         Used in ``get_queryset`` below to tell ``SearchableQuerySet``
         which search fields to use.
 
@@ -282,11 +294,14 @@ class SearchableManager(Manager):
         return search_fields
 
     def get_queryset(self):
+        """Get searchable queryset."""
         search_fields = self.get_search_fields()
         return SearchableQuerySet(self.model, search_fields=search_fields)
 
     def contribute_to_class(self, model, name):
         """
+        Reinstate class.
+
         Newer versions of Django explicitly prevent managers being
         accessed from abstract classes, which is behaviour the search
         API has always relied on. Here we reinstate it.
@@ -296,9 +311,9 @@ class SearchableManager(Manager):
 
     def search(self, *args, **kwargs):
         """
-        Proxy to queryset's search method for the manager's model and
-        any models that subclass from this manager's model if the
-        model is abstract.
+        Proxy to queryset's search method for the manager's model.
+
+        Also for any models that subclass from this manager's model if the model is abstract.
         """
         if not settings.SEARCH_MODEL_CHOICES:
             # No choices defined - build a list of leaf models (those
@@ -371,7 +386,4 @@ class SearchableManager(Manager):
 
 
 class BaseEntityManager(PublishedManager, SearchableManager):
-    """
-        Manually combines ``PublishedManager`` and ``SearchableManager``
-        for the ``BaseEntity`` model.
-    """
+    """Manually combines ``PublishedManager`` and ``SearchableManager`` for the ``BaseEntity`` model."""

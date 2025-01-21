@@ -12,7 +12,6 @@
 import os
 import sys
 import django
-from django.conf import settings
 
 
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
@@ -23,7 +22,6 @@ on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 sys.path.insert(0, os.path.abspath('..'))
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'lite_cms_core_sample.settings')
 
-settings.configure()
 django.setup()
 
 # -- General configuration -----------------------------------------------------

@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const showToolbarButton = document.querySelector('.show-toolbar');
     const adminLinks = document.querySelectorAll('.admin-link');
 
+    // If no user is logged in, there's nothing to do, there are no buttons
+    if (!hideToolbarButton || !showToolbarButton) return;
+
     // Hide toolbar logic
     hideToolbarButton.addEventListener('click', function () {
         console.log('hide collaps button');

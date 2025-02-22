@@ -2,6 +2,13 @@
 
 <!-- GENERATOR_PLACEHOLDER -->
 
+## 0.0.8
+
+### Fixed
+  - Fix a javascript error in toolbar.js where trying to get the toolbar 
+    buttons caused an error when no user is logged in since then no buttons
+    are rendered. So the button variables where null.
+
 ## 0.0.7
 
 ### Changed

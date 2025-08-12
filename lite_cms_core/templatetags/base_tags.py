@@ -52,6 +52,6 @@ def search_form(context, search_model_names=None):
 @register.filter
 def get_search_type(instance):
     """Get the content type for a model instance."""
-    from django.contrib.contenttypes.models import ContentType
+    from django.contrib.contenttypes.models import ContentType  # noqa: PLC0415
     typus = ContentType.objects.get_for_model(instance)
     return typus.name

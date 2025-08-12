@@ -188,13 +188,14 @@ htmlhelp_basename = 'django-lite-cms-core-doc'
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
-latex_documents = [
+latex_documents = [(
     "index",
     "django-lite-cms-core",
     "django-lite-cms-core Documentation",
-    "django-lite-cms-core developers",
-    "manual",  # 'howto' or 'manual'
-]
+    "django-lite-cms-core",
+    # "manual",  # 'howto' or 'manual'
+    False
+)]
 
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
@@ -228,7 +229,8 @@ man_pages = [
     "index",
     "django-lite-cms-core",
     "django-lite-cms-core Documentation",
-    "django-lite-cms-core developers",
+    ["django-lite-cms-core developers"],
+    1,
 ]
 
 if not on_rtd:  # only import and set the theme if we're building docs locally

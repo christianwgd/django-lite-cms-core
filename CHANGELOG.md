@@ -6,6 +6,8 @@
 
 ### Fixed
     - Fixed a typo in changelog
+    - Fixed a syntax error in docs conf.py
+
 ### Change
     - Update test dependencies to latest versions
     - Update action/checkout to latest version v5

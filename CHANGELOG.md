@@ -2,6 +2,15 @@
 
 <!-- GENERATOR_PLACEHOLDER -->
 
+## 0.0.9
+
+### Fixed
+    - Fixed a typo in changelog
+### Change
+    - Update test dependencies to latest versions
+    - Update action/checkout to latest version v5
+    - Disbled PLC0415 (import outside top level) check in ruff
+
 ## 0.0.8
 
 ### Fixed

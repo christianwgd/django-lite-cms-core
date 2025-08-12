@@ -25,7 +25,7 @@ CONTENT_STATUS_CHOICES = (
 def wrapped_manager(klass):
     """Combine Manager with MultilungualManager."""
     if getattr(settings, "USE_MODELTRANSLATION", False):
-        from modeltranslation.manager import MultilingualManager
+        from modeltranslation.manager import MultilingualManager  # noqa: PLC0415
         class Mgr(MultilingualManager, klass):
             pass
         return Mgr()
@@ -254,7 +254,7 @@ class SluggedMixin(models.Model):
             attr = "title"
         if settings.USE_MODELTRANSLATION:
             # pylint: disable=import-error, import-outside-toplevel
-            from modeltranslation.utils import build_localized_fieldname
+            from modeltranslation.utils import build_localized_fieldname  # noqa: PLC0415
             attr = build_localized_fieldname(attr, settings.LANGUAGE_CODE)
         return slugify(getattr(self, attr, None) or self.title)
 

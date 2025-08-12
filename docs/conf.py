@@ -192,8 +192,8 @@ latex_documents = [
     "index",
     "django-lite-cms-core",
     "django-lite-cms-core Documentation",
-    ["django-lite-cms-core developers"],
-    1,
+    "django-lite-cms-core developers",
+    "manual",  # 'howto' or 'manual'
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -228,8 +228,7 @@ man_pages = [
     "index",
     "django-lite-cms-core",
     "django-lite-cms-core Documentation",
-    ["django-lite-cms-core developers"],
-    1,
+    "django-lite-cms-core developers",
 ]
 
 if not on_rtd:  # only import and set the theme if we're building docs locally

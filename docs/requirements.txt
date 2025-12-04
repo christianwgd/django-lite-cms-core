@@ -1,6 +1,6 @@
 Sphinx==8.2.3
 sphinx-rtd-theme==3.0.2
-django==5.2.6
+django==5.2.9
 django-admin-sortable2==2.2.8
 django-bootstrap5==25.2
 django-filebrowser-no-grappelli==4.0.2

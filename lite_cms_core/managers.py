@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Django Lite CMS Managers."""
 from functools import reduce
 from operator import ior, iand

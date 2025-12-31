@@ -8,8 +8,8 @@ register = template.Library()
 
 
 @register.inclusion_tag('lite_cms_core/includes/edit_toolbar.html')
-def edit_toolbar(model_instance=None, permission=False):
-    """Shows the editable toolbar and adds an admin edit link, if model instance is not None."""
+def edit_toolbar(model_instance=None, permission=False):  # noqa: FBT002
+    """Shows the editable toolbar and adds an admin edit link if model instance is not None."""
     admin_edit_link = None
     if model_instance and permission:
         edit_link_name = f'admin:{model_instance._meta.app_label}_{model_instance._meta.model_name}_change'

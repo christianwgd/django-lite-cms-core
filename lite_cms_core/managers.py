@@ -175,12 +175,12 @@ class SearchableQuerySet(QuerySet):
 
         # Create the queryset combining each set of terms.
         # pylint: disable=consider-using-f-string
-        excluded = [reduce(iand, [~Q(**{"%s__icontains" % f: t[1:]}) for f in
-            self._search_fields.keys()]) for t in terms if t[0:1] == "-"]
-        required = [reduce(ior, [Q(**{"%s__icontains" % f: t[1:]}) for f in
-            self._search_fields.keys()]) for t in terms if t[0:1] == "+"]
-        optional = [reduce(ior, [Q(**{"%s__icontains" % f: t}) for f in
-            self._search_fields.keys()]) for t in terms if t[0:1] not in "+-"]
+        excluded = [reduce(iand, [~Q(**{"%s__icontains" % f: t[1:]}) for f in  # noqa: UP031
+            self._search_fields]) for t in terms if t[0:1] == "-"]
+        required = [reduce(ior, [Q(**{"%s__icontains" % f: t[1:]}) for f in  # noqa: UP031
+            self._search_fields]) for t in terms if t[0:1] == "+"]
+        optional = [reduce(ior, [Q(**{"%s__icontains" % f: t}) for f in  # noqa: UP031
+            self._search_fields]) for t in terms if t[0:1] not in "+-"]
         queryset = self
         if excluded:
             queryset = queryset.filter(reduce(iand, excluded))

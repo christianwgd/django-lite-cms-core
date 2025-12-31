@@ -172,11 +172,11 @@ class BaseEntity(models.Model):
 
     def get_next_by_publish_date(self, **kwargs):
         """Retrieves next object by publish date."""
-        return self._get_next_or_previous_by_publish_date(True, **kwargs)
+        return self._get_next_or_previous_by_publish_date(is_next=True, **kwargs)
 
     def get_previous_by_publish_date(self, **kwargs):
         """Retrieves previous object by publish date."""
-        return self._get_next_or_previous_by_publish_date(False, **kwargs)
+        return self._get_next_or_previous_by_publish_date(is_next=False, **kwargs)
 
     def get_absolute_url(self):
         """
@@ -327,7 +327,6 @@ class PreventUnpublishedAccessDetailView(DetailView):
 
     def dispatch(self, request, *args, **kwargs):
         """Show HTTP 404 for not published items."""
-        if not request.user.is_staff:
-            if not self.get_object().published:
-                raise Http404
+        if not request.user.is_staff and not self.get_object().published:
+            raise Http404
         return super().dispatch(request, *args, **kwargs)

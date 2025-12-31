@@ -36,7 +36,7 @@ ignore = [
     "B905",  # `zip()` without an explicit `strict=` parameter
     "PT009",  # Use a regular `assert` instead of unittest-style `{assertion}`
     "S308",  # Use of `mark_safe` may expose cross-site scripting vulnerabilities
-    "PLR2004",  # magic-value-comparison
+    "PLR2004",  # magic-rvalue-comparison
     "N813", # Camelcase `BeautifulSoup` imported as lowercase `bs`
     "PLR0912", # Too many branches
     "PLR0915", # Too many statements
@@ -56,13 +56,10 @@ python_files = ["tests.py", "test_*.py"]
 
 
 [tool.coverage.run]
+include = ["lite_cms_core/*"]
 omit = [
-    "./manage.py",
     "*/tests.py",
     "**/*migrations*/*",
-    "lite_cms_core_sample/wsgi.py",
-    "lite_cms_core_sample/asgi.py",
-    "*/lite_cms_core_sample/*",
 ]
 
 [tool.django-stubs]

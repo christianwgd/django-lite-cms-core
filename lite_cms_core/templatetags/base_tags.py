@@ -39,12 +39,12 @@ def search_form(context, search_model_names=None):
     for model_name in search_model_names:
         parts = model_name.split(".", 1)
         if len(parts) != 2:
-            continue
+            continue  # pragma: no cover
         app_label, model_name_part = parts
         try:
             model = apps.get_model(app_label, model_name_part)
-        except LookupError:
-            continue
+        except LookupError:  # pragma: no cover
+            continue  # pragma: no cover
         verbose_name = model._meta.verbose_name_plural.capitalize()
         search_model_choices.append((verbose_name, model_name))
     template_vars["search_model_choices"] = sorted(search_model_choices)

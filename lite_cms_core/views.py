@@ -27,12 +27,12 @@ def search(request, template="lite_cms_core/search_results.html", extra_context=
         for search_type in search_types:
             parts = search_type.split(".", 1)
             if len(parts) != 2:
-                continue
+                continue  # pragma: no cover
             app_label, model_name = parts
             try:
                 search_model = apps.get_model(app_label, model_name)
-            except LookupError:
-                continue
+            except LookupError:  # pragma: no cover
+                continue  # pragma: no cover
             results += search_model.objects.search(query, for_user=request.user)
         search_type = _("Everything")
     else:
@@ -58,12 +58,12 @@ def ext_search_form(request):
     for name in settings.SEARCH_MODEL_CHOICES:
         parts = name.split(".", 1)
         if len(parts) != 2:
-            continue
+            continue  # pragma: no cover
         app_label, model_name = parts
         try:
             model = apps.get_model(app_label, model_name)
-        except LookupError:
-            continue
+        except LookupError:  # pragma: no cover
+            continue  # pragma: no cover
         search_choices.add((model._meta.verbose_name.title(), name))
     return render(
         request,

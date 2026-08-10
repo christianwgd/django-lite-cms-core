@@ -2,6 +2,17 @@
 
 <!-- GENERATOR_PLACEHOLDER -->
 
+## 0.1.0
+
+### Fixed
+    - Removed some unused code
+    - Fixed performace issues in loops with try-except statements
+    
+### Changed
+    - Support Django 6.1
+    - Increase test coverage to 90%
+    - Updated github actions versions
+
 ## 0.0.9
 
 ### Fixed

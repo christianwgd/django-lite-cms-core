@@ -6,9 +6,9 @@ git+https://github.com/christianwgd/django-filebrowser-no-grappelli.git
 django-modeltranslation==0.20.3
 django-tinymce==5.0.0
 Pillow==12.3.0
-pytest==9.0.3
+pytest==9.1.1
 pytest-cov==7.1.0
-pytest-django==4.12.0
-ruff==0.15.13
-coverage==7.14.0
-Faker==40.18.0
+pytest-django==4.14.0
+ruff==0.16.2
+coverage==7.15.4
+Faker==40.36.0

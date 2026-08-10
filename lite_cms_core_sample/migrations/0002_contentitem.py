@@ -8,20 +8,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('lite_cms_core_sample', '0001_initial'),
+        ("lite_cms_core_sample", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='ContentItem',
+            name="ContentItem",
             fields=[
-                ('baseitem_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='lite_cms_core_sample.baseitem')),
-                ('slug', models.SlugField(blank=True, help_text='Is generated if no value has been specified', max_length=200, unique=True)),
-                ('content', tinymce.models.HTMLField(blank=True, null=True, verbose_name='Content')),
+                ("baseitem_ptr", models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to="lite_cms_core_sample.baseitem")),
+                ("slug", models.SlugField(blank=True, help_text="Is generated if no value has been specified", max_length=200, unique=True)),
+                ("content", tinymce.models.HTMLField(blank=True, null=True, verbose_name="Content")),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
-            bases=('lite_cms_core_sample.baseitem', models.Model),
+            bases=("lite_cms_core_sample.baseitem", models.Model),
         ),
     ]

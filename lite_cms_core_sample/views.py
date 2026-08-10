@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from django.views.generic import DetailView
 
-from lite_cms_core_sample.models import SluggedItem, ContentItem, BaseItem
+from lite_cms_core_sample.models import BaseItem, ContentItem, SluggedItem
 
 
 def index(request):
-    return render(request, 'index.html', {})
+    return render(request, "index.html", {})
 
 class BaseItemDetailView(DetailView):
     model = BaseItem

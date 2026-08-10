@@ -12,9 +12,9 @@ from lite_cms_core_sample.models import BaseItem
 class BaseEntityTest(TestCase):
 
     def setUp(self) -> None:
-        self.fake = Faker('de_DE')
+        self.fake = Faker("de_DE")
         self.base_item = BaseItem.objects.create(
-            title=' '.join(self.fake.words()),
+            title=" ".join(self.fake.words()),
         )
 
     def test_base_item_str(self):
@@ -26,7 +26,7 @@ class BaseEntityTest(TestCase):
         self.assertTrue(td < timedelta(minutes=1))
 
     def test_base_item_has_status(self):
-        self.assertTrue(hasattr(self.base_item, 'status'))
+        self.assertTrue(hasattr(self.base_item, "status"))
 
     def test_base_item_is_published(self):
         # Status default for BaseEntity is CONTENT_STATUS_PUBLISHED
@@ -38,8 +38,8 @@ class BaseEntityTest(TestCase):
         self.assertFalse(self.base_item.published)
 
     def test_base_item_has_date_fields(self):
-        self.assertTrue(hasattr(self.base_item, 'publish_date'))
-        self.assertTrue(hasattr(self.base_item, 'expiry_date'))
+        self.assertTrue(hasattr(self.base_item, "publish_date"))
+        self.assertTrue(hasattr(self.base_item, "expiry_date"))
 
     def test_base_item_not_published_by_publish_date(self):
         self.base_item.publish_date = now() + timedelta(days=1)
@@ -55,7 +55,7 @@ class BaseEntityTest(TestCase):
         self.base_item.publish_date = now() - timedelta(days=2)
         self.base_item.save()
         newer_base_item = BaseItem.objects.create(
-            title=' '.join(self.fake.words()),
+            title=" ".join(self.fake.words()),
             publish_date=now() - timedelta(days=1),
         )
         self.assertEqual(
@@ -67,7 +67,7 @@ class BaseEntityTest(TestCase):
         self.base_item.publish_date = now() - timedelta(days=1)
         self.base_item.save()
         older_base_item = BaseItem.objects.create(
-            title=' '.join(self.fake.words()),
+            title=" ".join(self.fake.words()),
             publish_date=now() - timedelta(days=2),
         )
         self.assertEqual(
@@ -78,30 +78,30 @@ class BaseEntityTest(TestCase):
     def test_base_item_get_absolute_url(self):
         self.assertEqual(
             self.base_item.get_absolute_url(),
-            reverse('base-item-detail', kwargs={'pk': self.base_item.pk})
+            reverse("base-item-detail", kwargs={"pk": self.base_item.pk}),
         )
 
 
 class BaseEntityManagerTest(TestCase):
 
     def setUp(self) -> None:
-        self.fake = Faker('de_DE')
+        self.fake = Faker("de_DE")
         for _ in range(5):
             BaseItem.objects.create(
-                title=' '.join(self.fake.words()),
+                title=" ".join(self.fake.words()),
             )
         self.base_item = BaseItem.objects.create(
-            title='This is a text for testing',
+            title="This is a text for testing",
         )
 
     def test_base_item_search(self):
         self.assertEqual(
-            BaseItem.objects.search('testing'),
+            BaseItem.objects.search("testing"),
             [self.base_item],
         )
 
     def test_base_item_search_with_search_fields(self):
         self.assertEqual(
-            BaseItem.objects.search('testing', search_fields=['title']),
+            BaseItem.objects.search("testing", search_fields=["title"]),
             [self.base_item],
         )

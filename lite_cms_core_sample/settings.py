@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 
 from pathlib import Path
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(Path(Path(__file__).resolve()).parent).parent
 PROJECT_APP_PATH = Path(Path(__file__).resolve()).parent
@@ -21,68 +20,68 @@ PROJECT_APP = Path(PROJECT_APP_PATH).name
 # Settings for tests, override in production with localsettings!
 DEBUG = True
 
-SECRET_KEY = 'django-insecure-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'  # noqa: S105
+SECRET_KEY = "django-insecure-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"  # noqa: S105
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': BASE_DIR / 'test.db',  # Or path to database file if using sqlite3.
-    }
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        "NAME": BASE_DIR / "test.db",  # Or path to database file if using sqlite3.
+    },
 }
 
 # Application definition
 INSTALLED_APPS = [
-    'filebrowser',
-    'tinymce',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.sites',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'lite_cms_core',
-    'adminsortable2',
-    'django_bootstrap5',
-    'lite_cms_core_sample',
+    "filebrowser",
+    "tinymce",
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.sites",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "lite_cms_core",
+    "adminsortable2",
+    "django_bootstrap5",
+    "lite_cms_core_sample",
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.contrib.sites.middleware.CurrentSiteMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.contrib.sites.middleware.CurrentSiteMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = 'lite_cms_core_sample.urls'
+ROOT_URLCONF = "lite_cms_core_sample.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
-            'builtins': [
-                'django.templatetags.i18n',
-                'django.templatetags.static',
-                'django_bootstrap5.templatetags.django_bootstrap5',
+            "builtins": [
+                "django.templatetags.i18n",
+                "django.templatetags.static",
+                "django_bootstrap5.templatetags.django_bootstrap5",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'lite_cms_core_sample.wsgi.application'
+WSGI_APPLICATION = "lite_cms_core_sample.wsgi.application"
 
 
 # Internationalization
@@ -90,8 +89,8 @@ WSGI_APPLICATION = 'lite_cms_core_sample.wsgi.application'
 
 USE_MODELTRANSLATION = False
 
-LANGUAGE_CODE = 'en'
-TIME_ZONE = 'Europe/Berlin'
+LANGUAGE_CODE = "en"
+TIME_ZONE = "Europe/Berlin"
 USE_I18N = True
 USE_TZ = True
 
@@ -101,15 +100,15 @@ SITE_ID = 1
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
-STATIC_ROOT = BASE_DIR / 'static'
-STATIC_URL = '/static/'
-MEDIA_ROOT = BASE_DIR / 'media'
-MEDIA_URL = '/media/'
+STATIC_ROOT = BASE_DIR / "static"
+STATIC_URL = "/static/"
+MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "/media/"
 
-DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 # Search
 SEARCH_MODEL_CHOICES = (
-    'lite_cms_core_sample.BaseItem',
-    'lite_cms_core_sample.ContentItem',
+    "lite_cms_core_sample.BaseItem",
+    "lite_cms_core_sample.ContentItem",
 )

@@ -13,39 +13,39 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='BaseItem',
+            name="BaseItem",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=200, verbose_name='Title')),
-                ('status', models.IntegerField(choices=[(1, 'Draft'), (2, 'Published')], default=2, help_text='With Draft chosen, will only be shown for admin users on the site.', verbose_name='Status')),
-                ('publish_date', models.DateTimeField(blank=True, db_index=True, help_text="With Published chosen, won't be shown until this time", null=True, verbose_name='Published from')),
-                ('expiry_date', models.DateTimeField(blank=True, help_text="With Published chosen, won't be shown after this time", null=True, verbose_name='Expires on')),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("title", models.CharField(max_length=200, verbose_name="Title")),
+                ("status", models.IntegerField(choices=[(1, "Draft"), (2, "Published")], default=2, help_text="With Draft chosen, will only be shown for admin users on the site.", verbose_name="Status")),
+                ("publish_date", models.DateTimeField(blank=True, db_index=True, help_text="With Published chosen, won't be shown until this time", null=True, verbose_name="Published from")),
+                ("expiry_date", models.DateTimeField(blank=True, help_text="With Published chosen, won't be shown after this time", null=True, verbose_name="Expires on")),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
         migrations.CreateModel(
-            name='SluggedItem',
+            name="SluggedItem",
             fields=[
-                ('baseitem_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='lite_cms_core_sample.baseitem')),
-                ('slug', models.SlugField(blank=True, help_text='Is generated if no value has been specified', max_length=200, unique=True)),
+                ("baseitem_ptr", models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to="lite_cms_core_sample.baseitem")),
+                ("slug", models.SlugField(blank=True, help_text="Is generated if no value has been specified", max_length=200, unique=True)),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
-            bases=('lite_cms_core_sample.baseitem', models.Model),
+            bases=("lite_cms_core_sample.baseitem", models.Model),
         ),
         migrations.CreateModel(
-            name='SluggedItemFromName',
+            name="SluggedItemFromName",
             fields=[
-                ('baseitem_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='lite_cms_core_sample.baseitem')),
-                ('slug', models.SlugField(blank=True, help_text='Is generated if no value has been specified', max_length=200, unique=True)),
-                ('name', models.CharField(max_length=100)),
+                ("baseitem_ptr", models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to="lite_cms_core_sample.baseitem")),
+                ("slug", models.SlugField(blank=True, help_text="Is generated if no value has been specified", max_length=200, unique=True)),
+                ("name", models.CharField(max_length=100)),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
-            bases=('lite_cms_core_sample.baseitem', models.Model),
+            bases=("lite_cms_core_sample.baseitem", models.Model),
         ),
     ]

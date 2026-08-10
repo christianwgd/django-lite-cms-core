@@ -1,5 +1,4 @@
 """Django Lite CMS Views."""
-from operator import itemgetter
 
 from django.apps import apps
 from django.conf import settings
@@ -19,12 +18,21 @@ def search(request, template="lite_cms_core/search_results.html", extra_context=
     try:
         parts = request.GET.get("type", "").split(".", 1)
         search_model = apps.get_model(*parts)
+        # pylint: disable=pointless-statement
+        search_model.objects.search  # noqa: B018
+        results = search_model.objects.search(query, for_user=request.user)
     except (ValueError, TypeError, LookupError, AttributeError):
         search_types = settings.SEARCH_MODEL_CHOICES
         results = []
         for search_type in search_types:
             parts = search_type.split(".", 1)
-            search_model = apps.get_model(*parts)
+            if len(parts) != 2:
+                continue
+            app_label, model_name = parts
+            try:
+                search_model = apps.get_model(app_label, model_name)
+            except LookupError:
+                continue
             results += search_model.objects.search(query, for_user=request.user)
         search_type = _("Everything")
     else:
@@ -32,10 +40,10 @@ def search(request, template="lite_cms_core/search_results.html", extra_context=
         results = search_model.objects.search(query, for_user=request.user)
 
     paginator = Paginator(results, 10)
-    page_obj = paginator.get_page(request.GET.get('page'))
+    page_obj = paginator.get_page(request.GET.get("page"))
 
     context = {"query": query, "results": page_obj,
-               "search_type": search_type, 'total': len(results)}
+               "search_type": search_type, "total": len(results)}
     context.update(extra_context or {})
     return render(request, template, context)
 
@@ -46,18 +54,21 @@ def ext_search_form(request):
 
     The extended search form lets users select a model to search on.
     """
-    choices = set()
+    search_choices = set()
     for name in settings.SEARCH_MODEL_CHOICES:
+        parts = name.split(".", 1)
+        if len(parts) != 2:
+            continue
+        app_label, model_name = parts
         try:
-            model = apps.get_model(*name.split(".", 1))
-            model_name = model._meta.verbose_name.title()
+            model = apps.get_model(app_label, model_name)
         except LookupError:
-            pass
-        else:
-            choices.add((model_name, name))
-    search_choices = list(choices)
-    # sort by localized name
-    search_choices.sort(key=itemgetter(0))
-    return render(request, 'lite_cms_core/ext_search_form.html', {
-        'search_model_choices': search_choices
-    })
+            continue
+        search_choices.add((model._meta.verbose_name.title(), name))
+    return render(
+        request,
+        "lite_cms_core/ext_search_form.html",
+        {
+            "search_model_choices": search_choices,
+        },
+    )

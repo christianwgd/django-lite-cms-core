@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
-from lite_cms_core.models import BaseEntity, SluggedMixin, ContentFieldMixin
+from lite_cms_core.models import BaseEntity, ContentFieldMixin, SluggedMixin
 
 
 class BaseItem(BaseEntity):
@@ -12,7 +12,7 @@ class BaseItem(BaseEntity):
     search_fields = {"title"}
 
     def get_absolute_url(self):
-        return reverse('base-item-detail', kwargs={'pk': self.pk})
+        return reverse("base-item-detail", kwargs={"pk": self.pk})
 
 
 class SluggedItem(SluggedMixin, BaseItem):
@@ -21,7 +21,7 @@ class SluggedItem(SluggedMixin, BaseItem):
     """
 
     def get_absolute_url(self):
-        return reverse('slugged-item-detail', args=[str(self.slug)])
+        return reverse("slugged-item-detail", args=[str(self.slug)])
 
 
 class SluggedItemFromName(SluggedMixin, BaseItem):
@@ -43,4 +43,4 @@ class ContentItem(ContentFieldMixin, SluggedMixin, BaseItem):
     search_fields = {"title", "content"}
 
     def get_absolute_url(self):
-        return reverse('content-item-detail', args=[str(self.slug)])
+        return reverse("content-item-detail", args=[str(self.slug)])

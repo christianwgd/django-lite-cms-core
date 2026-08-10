@@ -1,41 +1,33 @@
-"""Django Lite CMS Managers."""
 from functools import reduce
-from operator import ior, iand
+from operator import iand, ior
 from string import punctuation
 
 from django.apps import apps
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
-from django.db.models import Manager, QuerySet, Q, CharField, TextField
+from django.db.models import CharField, Manager, Q, QuerySet, TextField
 from django.db.models.manager import ManagerDescriptor
 from django.utils.timezone import now
 
 
 class PublishedManager(Manager):
-    """For non-staff users, return items with a published status."""
-
+    """
+    For non-staff users, return items with a published status.
+    """
     def published(self, for_user=None):
-        """
-        Return a QuerySet of published items.
+        if for_user is not None and for_user.is_staff:
+            return self.all()
 
-        An item is published if it has the status CONTENT_STATUS_PUBLISHED and
-        the pusblish_date is lower or equal to *now* and the expiry_date is
-        grater or equal to *now*. If the publish_date or the expiry_date is None,
-        they will be ignored.
-
-        Not published items will only be returned for staff users.
-        """
         if for_user is not None and for_user.is_staff:
             return self.all()
         return self.filter(
             Q(publish_date__lte=now()) | Q(publish_date__isnull=True),
             Q(expiry_date__gte=now()) | Q(expiry_date__isnull=True),
             # due to circular imports use the "2" instead of CONTENT_STATUS_PUBLISHED
-            status=2
+            status=2,
         )
 
     def get_by_natural_key(self, slug):
-        """Return item by natural key."""
         return self.get(slug=slug)
 
 
@@ -94,8 +86,6 @@ STOP_WORDS = (
 
 def search_fields_to_dict(fields):
     """
-    Convert search fields to a dictionary.
-
     In ``SearchableQuerySet`` and ``SearchableManager``, search fields
     can either be a sequence, or a dict of fields mapped to weights.
     This function converts sequences to a dict mapped to even weights,
@@ -107,15 +97,21 @@ def search_fields_to_dict(fields):
     try:
         int(next(iter(dict(fields).values())))
     except (TypeError, ValueError):
-        fields = dict(zip(fields, [1] * len(fields)))
+        fields = dict(zip(fields, [1] * len(fields), strict=True))
     return fields
 
 
+def get_positive_terms(terms):
+    return [t.lower().strip(punctuation) for t in terms if t[0:1] != "-"]
+
+
 class SearchableQuerySet(QuerySet):
-    """QuerySet providing main search functionality for ``SearchableManager``."""
+    """
+    QuerySet providing main search functionality for
+    ``SearchableManager``.
+    """
 
     def __init__(self, *args, **kwargs):
-        """Init SearchableQuerySet."""
         self._search_ordered = False
         self._search_terms = set()
         self._search_fields = kwargs.pop("search_fields", {})
@@ -123,13 +119,12 @@ class SearchableQuerySet(QuerySet):
 
     def search(self, query, search_fields=None):
         """
-        Do the search on SearchableQuerySet.
-
         Build a queryset matching words in the given search query,
         treating quoted terms as exact phrases and taking into
         account + and - symbols as modifiers controlling which terms
         to require and exclude.
         """
+
         # ### DETERMINE FIELDS TO SEARCH ###
 
         # Use search_fields arg if given, otherwise use search_fields
@@ -156,9 +151,6 @@ class SearchableQuerySet(QuerySet):
         # the search query. If doing so ends up with an empty term
         # list, then keep the stop words.
         terms_no_stopwords = [t for t in terms if t.lower() not in STOP_WORDS]
-        # pylint: disable=unnecessary-lambda-assignment
-        def get_positive_terms(terms):
-            return [t.lower().strip(punctuation) for t in terms if t[0:1] != "-"]
         positive_terms = get_positive_terms(terms_no_stopwords)
         if positive_terms:
             terms = terms_no_stopwords
@@ -168,18 +160,16 @@ class SearchableQuerySet(QuerySet):
         # to the internal list for sorting when results are iterated.
         if not positive_terms:
             return self.none()
-
         self._search_terms.update(positive_terms)
 
         # ### BUILD QUERYSET FILTER ###
 
         # Create the queryset combining each set of terms.
-        # pylint: disable=consider-using-f-string
-        excluded = [reduce(iand, [~Q(**{"%s__icontains" % f: t[1:]}) for f in  # noqa: UP031
+        excluded = [reduce(iand, [~Q(**{f"{f}__icontains": t[1:]}) for f in
             self._search_fields]) for t in terms if t[0:1] == "-"]
-        required = [reduce(ior, [Q(**{"%s__icontains" % f: t[1:]}) for f in  # noqa: UP031
+        required = [reduce(ior, [Q(**{f"{f}__icontains": t[1:]}) for f in
             self._search_fields]) for t in terms if t[0:1] == "+"]
-        optional = [reduce(ior, [Q(**{"%s__icontains" % f: t}) for f in  # noqa: UP031
+        optional = [reduce(ior, [Q(**{f"{f}__icontains": t}) for f in
             self._search_fields]) for t in terms if t[0:1] not in "+-"]
         queryset = self
         if excluded:
@@ -192,8 +182,11 @@ class SearchableQuerySet(QuerySet):
             queryset = queryset.filter(reduce(ior, optional))
         return queryset.distinct()
 
+    # pylint: disable=protected-access
     def _clone(self):
-        """Ensure attributes are copied to subsequent queries."""
+        """
+        Ensure attributes are copied to subsequent queries.
+        """
         clone = super()._clone()
         clone._search_terms = self._search_terms
         clone._search_fields = self._search_fields
@@ -201,15 +194,15 @@ class SearchableQuerySet(QuerySet):
         return clone
 
     def order_by(self, *field_names):
-        """Mark the filter as being ordered if search has occurred."""
+        """
+        Mark the filter as being ordered if search has occurred.
+        """
         if not self._search_ordered:
             self._search_ordered = len(self._search_terms) > 0
         return super().order_by(*field_names)
 
     def annotate_scores(self):
         """
-        Annotate SearchableQuerySet with scores.
-
         If search has occurred and no ordering has occurred, decorate
         each result with the number of search terms so that it can be
         sorted by the number of occurrence of terms.
@@ -246,23 +239,21 @@ class SearchableQuerySet(QuerySet):
 class SearchableManager(Manager):
     """
     Manager providing a chainable queryset.
-
     Adapted from http://www.djangosnippets.org/snippets/562/
     search method supports spanning across models that subclass the
     model being used to search.
     """
 
     def __init__(self, *args, **kwargs):
-        """Init SearchableManager."""
         self._search_fields = kwargs.pop("search_fields", {})
         super().__init__(*args, **kwargs)
 
     def get_search_fields(self):
         """
         Returns the search field names mapped to weights as a dict.
-
         Used in ``get_queryset`` below to tell ``SearchableQuerySet``
-        which search fields to use.
+        which search fields to use. Also used by ``DisplayableAdmin``
+        to populate Django admin's ``search_fields`` attribute.
 
         Search fields can be populated via
         ``SearchableManager.__init__``, which then get stored in
@@ -293,14 +284,11 @@ class SearchableManager(Manager):
         return search_fields
 
     def get_queryset(self):
-        """Get searchable queryset."""
         search_fields = self.get_search_fields()
         return SearchableQuerySet(self.model, search_fields=search_fields)
 
     def contribute_to_class(self, model, name):
         """
-        Reinstate class.
-
         Newer versions of Django explicitly prevent managers being
         accessed from abstract classes, which is behaviour the search
         API has always relied on. Here we reinstate it.
@@ -310,9 +298,9 @@ class SearchableManager(Manager):
 
     def search(self, *args, **kwargs):
         """
-        Proxy to queryset's search method for the manager's model.
-
-        Also for any models that subclass from this manager's model if the model is abstract.
+        Proxy to queryset's search method for the manager's model and
+        any models that subclass from this manager's model if the
+        model is abstract.
         """
         if not settings.SEARCH_MODEL_CHOICES:
             # No choices defined - build a list of leaf models (those
@@ -324,7 +312,7 @@ class SearchableManager(Manager):
             models = [m for m in models if m not in parents]
         elif getattr(self.model._meta, "abstract", False):
             # When we're combining model subclasses for an abstract
-            # model, we only want to use models that
+            # model (eg Displayable), we only want to use models that
             # are represented by the ``SEARCH_MODEL_CHOICES`` setting.
             # Now this setting won't contain an exact list of models
             # we should use, since it can define superclass models such
@@ -335,20 +323,25 @@ class SearchableManager(Manager):
             models = set()
             parents = set()
             errors = []
+
+            all_models = {
+                f"{m._meta.app_label}.{m._meta.model_name}": m
+                for m in apps.get_models()
+            }
             for name in settings.SEARCH_MODEL_CHOICES:
-                try:
-                    model = apps.get_model(*name.split(".", 1))
-                except LookupError:
-                    errors.append(name)
-                else:
+                model = all_models.get(name.lower())
+                if model:
                     search_choices.add(model)
+                else:
+                    errors.append(name)
+
             if errors:
-                msg = "Could not load the model(s) {', '.join(errors)} defined in the 'SEARCH_MODEL_CHOICES' setting."
+                msg = f"Could not load the model(s) {', '.join(errors)} defined in the 'SEARCH_MODEL_CHOICES' setting."
                 raise ImproperlyConfigured(
-                    msg
+                    msg,
                 )
 
-            for model in apps.get_models():
+            for model in all_models.values():
                 # Model is actually a subclasses of what we're
                 # searching (eg Displayabale)
                 is_subclass = issubclass(model, self.model)
@@ -385,4 +378,7 @@ class SearchableManager(Manager):
 
 
 class BaseEntityManager(PublishedManager, SearchableManager):
-    """Manually combines ``PublishedManager`` and ``SearchableManager`` for the ``BaseEntity`` model."""
+    """
+        Manually combines ``PublishedManager`` and ``SearchableManager``
+        for the ``BaseEntity`` model.
+    """

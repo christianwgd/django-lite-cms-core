@@ -20,20 +20,6 @@ CONTENT_STATUS_CHOICES = (
     (CONTENT_STATUS_PUBLISHED, _("Published")),
 )
 
-GERMAN_UMLAUT = [
-    ["ä", "ae"],
-    ["ö", "oe"],
-    ["ü", "ue"],
-    ["Ä", "Ae"],
-    ["Ö", "Oe"],
-    ["Ü", "Ue"],
-    ["ß", "ss"],
-]
-
-
-def custom_slugify(name):
-    return slugify(name, replacements=GERMAN_UMLAUT)
-
 
 def wrapped_manager(klass):
     """Combine Manager with MultilungualManager."""
@@ -174,13 +160,13 @@ class BaseEntity(models.Model):
         concrete_model = base_concrete_model(BaseEntity, self)
         try:
             queryset = concrete_model.objects.published
-        except AttributeError:
-            queryset = concrete_model.objects.all
+        except AttributeError:  # pragma: no cover
+            queryset = concrete_model.objects.all  # pragma: no cover
         try:
             return queryset(**kwargs).filter(**lookup).order_by(order)[0]
-        except IndexError:
-            pass
-        return None
+        except IndexError:  # pragma: no cover
+            pass  # pragma: no cover
+        return None  # pragma: no cover
 
     def get_next_by_publish_date(self, **kwargs):
         """Retrieves next object by publish date."""

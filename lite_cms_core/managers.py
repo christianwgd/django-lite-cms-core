@@ -17,9 +17,6 @@ class PublishedManager(Manager):
     def published(self, for_user=None):
         if for_user is not None and for_user.is_staff:
             return self.all()
-
-        if for_user is not None and for_user.is_staff:
-            return self.all()
         return self.filter(
             Q(publish_date__lte=now()) | Q(publish_date__isnull=True),
             Q(expiry_date__gte=now()) | Q(expiry_date__isnull=True),
@@ -132,7 +129,7 @@ class SearchableQuerySet(QuerySet):
         if search_fields:
             self._search_fields = search_fields_to_dict(search_fields)
         if not self._search_fields:
-            return self.none()
+            return self.none()  # pragma: no cover
 
         # ### BUILD LIST OF TERMS TO SEARCH FOR ###
 

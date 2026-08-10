@@ -2,6 +2,11 @@
 
 <!-- GENERATOR_PLACEHOLDER -->
 
+## 0.1.1
+
+### Fixed
+    - Load search-form template from correct directory
+
 ## 0.1.0
 
 ### Fixed

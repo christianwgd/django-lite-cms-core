@@ -17,7 +17,7 @@ def edit_toolbar(model_instance=None, permission=False):  # noqa: FBT002
     return {"admin_edit_link": admin_edit_link}
 
 
-@register.inclusion_tag("includes/search_form.html", takes_context=True)
+@register.inclusion_tag("lite_cms_core/includes/search_form.html", takes_context=True)
 def search_form(context, search_model_names=None):
     """
     Includes the search form with a list of models to use as choices

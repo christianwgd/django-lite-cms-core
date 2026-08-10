@@ -7,7 +7,7 @@ with Path("README.md").open() as fh:
 
 setuptools.setup(
     name="django-lite-cms-core",
-    version="0.1.0",
+    version="0.1.1",
     packages=setuptools.find_packages(
         exclude=["lite_cms_core_sample", "*manage.py"],
     ),

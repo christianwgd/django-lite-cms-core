@@ -2,7 +2,6 @@ from datetime import timedelta
 
 import pytest
 from django.contrib import auth
-from django.http import Http404
 from django.test import TestCase, override_settings
 from django.urls import reverse
 from django.utils.timezone import now
